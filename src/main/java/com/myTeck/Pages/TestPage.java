@@ -1,6 +1,7 @@
 package com.myTeck.Pages;
 
 import com.myTeck.Base;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,12 +16,20 @@ public class TestPage extends Base {
     public TestPage(){
         PageFactory.initElements(driver,this);
     }
-    @FindBy(xpath = "//body[1]/div[1]/div[3]/form[1]/div[1]/div[1]/div[4]/center[1]/input[1]")
+    @FindBy(xpath = "//textarea[@id='APjFqb']")
     WebElement Button;
+    @FindBy(xpath = "//div[@class='FPdoLc lJ9FBc']//input[@name='btnK']")
+    WebElement searchBtn;
+    @FindBy(xpath = "//div[@role='heading'][normalize-space()='Hello']")
+    WebElement result;
 
     public void testperform()  {
-        Button.click();
+        Button.sendKeys("Hello");
+        searchBtn.click();
 
+    }
+    public void displayedAssert() {
+        Assert.assertTrue((result).isDisplayed());
     }
 
 }
