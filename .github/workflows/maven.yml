@@ -1,0 +1,41 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  workflow_dispatch:
+
+
+run-name: UI Smoke Tests by @${{ github.actor }}
+
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs: 
+
+  tests-run:
+    runs-on: windows-latest
+
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+ 
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        java-version: '17'
+
+    - name: Clean the project
+      run: mvn clean
+
+    - name: Run tests
+      run: mvn test

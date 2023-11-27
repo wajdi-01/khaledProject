@@ -1,0 +1,37 @@
+name: Myteck UI NRT
+
+on:
+  workflow_dispatch:
+
+jobs:
+  tests-run:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        java-version: '17'  
+
+    - name: Install Chocolatey
+      run: |
+        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+    - name: Install Google Chrome
+      run: choco install googlechrome --confirm
+
+    - name: Clean and build the project
+      run: mvn clean
+
+    - name: Run tests
+      run: mvn test
+
+    - name: Test Reports
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-reports
+        path: target/reports
