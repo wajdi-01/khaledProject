@@ -20,7 +20,7 @@ public class TestPage extends Base {
     WebElement Button;
     @FindBy(xpath = "//div[@class='FPdoLc lJ9FBc']//input[@name='btnK']")
     WebElement searchBtn;
-    @FindBy(xpath = "//div[@role='heading'][normalize-space()='Hello']")
+    @FindBy(xpath = "//div[@class='notranslate TbwUpd NJjxre iUh30 ojE3Fb']//div//span[@class='VuuXrf'][normalize-space()='hellomagazine.com']")
     WebElement result;
 
     public void testperform()  {
